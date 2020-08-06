@@ -1,0 +1,38 @@
+name: Run daily build
+on:
+  schedule:
+    - cron: "0 0 * * 3"
+
+jobs:
+  pull_data:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.5
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Pull data
+        run: poetry run otparchiver pull
+
+      - name: Git commit
+        run: |
+          git add data
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Commiting data"
+
+      - name: Git push
+        run: |
+          git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
