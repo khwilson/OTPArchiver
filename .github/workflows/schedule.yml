@@ -1,7 +1,7 @@
 name: Run daily build
 on:
   schedule:
-    - cron: "0 0 * * 3"
+    - cron: "0 0 * * 1,2,3,4,5"
 
 jobs:
   pull_data:
