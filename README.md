@@ -28,15 +28,15 @@ curl \
 
 ## Setting the schedule
 
-The schedule is set in the `[.github/workflows/schedule.yml](https://github.com/khwilson/OTPArchiver/blob/master/.github/workflows/schedule.yml#L4)` file. That line uses [cron syntax](https://crontab.guru/).
+The schedule is set in the [`.github/workflows/schedule.yml`](https://github.com/khwilson/OTPArchiver/blob/master/.github/workflows/schedule.yml#L4) file. That line uses [cron syntax](https://crontab.guru/).
 
 ## Customizing
 
-You can use this shell as is if you just change the contents of the `[pull_otps](https://github.com/khwilson/OTPArchiver/blob/master/otparchiver/cli.py#L41)` function. More generally, this whole thing is a `[click](https://click.palletsprojects.com/en/7.x/)` application, so you have all the usual tools.
+You can use this shell as is if you just change the contents of the [`pull_otps`](https://github.com/khwilson/OTPArchiver/blob/master/otparchiver/cli.py#L41) function. More generally, this whole thing is a [`click`](https://click.palletsprojects.com/en/7.x/) application, so you have all the usual tools.
 
 Two things of note: First, the dependencies of this project are managed by `poetry`, so if you would like to change the name of the command from `otparchiver` to something more descriptive, or point to some other location, you'll need to change [this line](https://github.com/khwilson/OTPArchiver/blob/master/pyproject.toml#L20) of the `pyproject.toml`.
 
-Second, the GitHub action [assumes](https://github.com/khwilson/OTPArchiver/blob/master/.github/workflows/schedule.yml#L46) that you're just dumping your output to the [/data] folder. You can change this by editing the `sched.yml` to say `git add SOME_OTHER_FOLDER` if you'd like.
+Second, the GitHub action [assumes](https://github.com/khwilson/OTPArchiver/blob/master/.github/workflows/schedule.yml#L46) that you're just dumping your output to the [/data] folder. You can change this by editing the `schedule.yml` to say `git add SOME_OTHER_FOLDER` if you'd like.
 
 ## LICENSE
 
