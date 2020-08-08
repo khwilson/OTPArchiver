@@ -2,6 +2,9 @@ name: Run daily build
 on:
   schedule:
     - cron: "0 0 * * 1,2,3,4,5"
+  repository_dispatch:
+    types:
+      - manual_trigger
 
 jobs:
   pull_data:
@@ -12,6 +15,11 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
 
       - name: Install poetry
         uses: dschep/install-poetry-action@v1.3
