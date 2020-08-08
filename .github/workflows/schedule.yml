@@ -26,6 +26,15 @@ jobs:
         with:
           version: 1.0.5
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: ${{ runner.OS }}-python-3.8-{{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+             ${{ runner.OS }}-python-3.8-
+             ${{ runner.OS }}-
+
       - name: Install dependencies
         run: poetry install
 
