@@ -2,7 +2,7 @@
 name = "otparchiver"
 version = "0.1.0"
 description = ""
-authors = ["Kevin H. Wilson <kevin_wilson@brown.edu>"]
+authors = ["Kevin H. Wilson <khwilson@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
