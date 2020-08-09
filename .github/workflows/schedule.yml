@@ -36,7 +36,7 @@ jobs:
              ${{ runner.OS }}-
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-dev
 
       - name: Pull data
         run: poetry run otparchiver pull
