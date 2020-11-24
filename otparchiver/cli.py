@@ -83,9 +83,9 @@ def pull_otps(output_filename: Optional[str] = None):
         # get page i and scrape the table
         form, data = get_form_data_base(soup)
         data["__EVENTTARGET"] = "ctl00$ContentPlaceHolder1$GridView1"
-        data["__EVENTARGUMENT"] = "Page$" + str(i)
+        data["__EVENTARGUMENT"] = f"Page${i}"
 
-        click.echo(f"Loading page {i} of results...")
+        click.echo(f"Loading page {i} / {page_count} of results...")
         response = session.post(URL, data=data)
         soup = bs4.BeautifulSoup(response.content, features="html.parser")
 
@@ -97,7 +97,7 @@ def pull_otps(output_filename: Optional[str] = None):
             row_data = []
             for elt in row.find_all("td")[:-1]:
                 # get the primary row data from the text in each td
-                row_data.append(elt.text.rstrip())
+                row_data.append(elt.text.strip())
 
             # get the latitude and longitude which are hidden in inputs in the phone column
             inputs = row.find_all("input")
